@@ -12,11 +12,8 @@
 ### 1. Создание виртуальной среды
 
 ```bash
-# Перейти в директорию проекта
-cd /home/alexander/proga/alpha_credit
-
 # Создать виртуальную среду
-python -m venv venv
+python3 -m venv venv
 
 # Активировать виртуальную среду
 # На Linux/Mac:
@@ -64,6 +61,8 @@ ReDoc документация: `http://localhost:8000/redoc`
 alpha_credit/
 ├── app/
 │   ├── __init__.py
+│   ├── dataclasses.py    # Базовые классы с данными
+│   ├── predictor.py      # Модуль, отвечающий за мл-модель
 │   └── main.py           # Основной файл приложения
 ├── venv/                 # Виртуальная среда
 ├── requirements.txt      # Зависимости
@@ -110,10 +109,6 @@ curl -X POST "http://localhost:8000/predict/batch" \
     ]
   }'
 ```
-
-## Разработка
-
-Для добавления функционала ML модели отредактируйте функции в `app/main.py` (место, отмеченное как `# TODO`).
 
 ## Лицензия
 
