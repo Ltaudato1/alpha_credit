@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income Prediction Service</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Income Prediction Service</h1>
+            <p>Предсказание доходов на основе данных клиента</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="single">Одиночное предсказание</button>
+            <button class="tab-btn" data-tab="batch">Пакетное предсказание</button>
+            <button class="tab-btn" data-tab="info">Информация</button>
+        </nav>
+
+        <!-- Single Prediction Tab -->
+        <div id="single" class="tab-content active">
+            <h2>Предсказать доход для клиента</h2>
+            
+            <!-- Загрузка CSV файла -->
+            <div class="form-group">
+                <label for="csvFile">Загрузите CSV файл с данными клиентов:</label>
+                <input type="file" id="csvFile" accept=".csv" required>
+                <small>Файл должен содержать все необходимые фичи (49 признаков)</small>
+            </div>
+
+            <!-- Выбор клиента по индексу -->
+            <form id="singleForm" class="form">
+                <div class="form-group">
+                    <label for="clientIndex">Индекс клиента в файле:</label>
+                    <input type="number" id="clientIndex" name="clientIndex" min="0" required placeholder="0">
+                    <small>Нумерация начинается с 0</small>
+                </div>
+
+                <button type="submit" class="btn-primary">Предсказать доход</button>
+            </form>
+
+            <div id="singleResult" class="result hidden">
+                <h3>Результат предсказания:</h3>
+                <div class="result-box">
+                    <p><strong>Предсказанный доход:</strong> <span id="incomeValue">$0</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Batch Prediction Tab -->
+        <div id="batch" class="tab-content">
+            <h2>Пакетное предсказание</h2>
+            
+            <!-- Загрузка CSV файла -->
+            <div class="form-group">
+                <label for="batchCsvFile">Загрузите CSV файл с данными клиентов:</label>
+                <input type="file" id="batchCsvFile" accept=".csv" required>
+            </div>
+
+            <button id="batchBtn" class="btn-primary">Предсказать для всех клиентов</button>
+
+            <div id="batchResult" class="result hidden">
+                <h3>Результаты пакетного предсказания:</h3>
+                <div class="batch-summary">
+                    <p>Обработано клиентов: <span id="totalClients">0</span></p>
+                </div>
+                <div id="batchResultList" class="result-list"></div>
+            </div>
+        </div>
+
+        <!-- Info Tab -->
+        <div id="info" class="tab-content">
+            <h2>Информация о сервисе</h2>
+            
+            <div class="info-box">
+                <h3>Статус API</h3>
+                <div id="apiStatus" class="loading">Проверка...</div>
+            </div>
+
+            <div class="info-box">
+                <h3>Информация о модели</h3>
+                <div id="modelInfo" class="loading">Загрузка...</div>
+            </div>
+
+            <div class="info-box">
+                <h3>Доступные признаки (49)</h3>
+                <div id="features" class="loading">Загрузка...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Добавляем Papa Parse для работы с CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
